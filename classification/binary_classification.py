@@ -37,17 +37,18 @@ y_train = torch.from_numpy(y_train.astype(np.float32))
 y_test = torch.from_numpy(y_test.astype(np.float32))
 
 
+# Set up device
+device = torch.device('cpu')
+if torch.cuda.is_available():
+    device = torch.device('cuda')
 
 # Setting optimizer and loss function
-
-model = ClassificationModel(2,1)
+model = ClassificationModel(2,1).to(device)
 optimizer = torch.optim.SGD(params=model.parameters(),lr= 0.1)
 loss_fn = nn.BCEWithLogitsLoss()
 
 # tranning loop
-device = torch.device('cpu')
-if torch.cuda.is_available():
-    device = torch.device('cuda')
+
 
 
 
